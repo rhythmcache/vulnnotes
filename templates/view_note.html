@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ note[1] }}</h1>
+<p><em>Note ID: {{ note[0] }} — owned by user id {{ note[3] }}</em></p>
+<div class="note-content">
+    {#
+        VULNERABILITY 4 (Stored XSS): the |safe filter below tells Jinja2
+        to render note[2] (the note's content) as raw HTML instead of
+        escaping it. Since any logged-in user can write a note containing
+        arbitrary text  including <script> tags  this means a malicious
+        note's JavaScript will execute in the browser of ANYONE who views
+        it, including users who didn't write it. See VULNERABILITIES.md
+        for the fix (just remove |safe and let Jinja2's default
+        autoescaping handle it).
+    #}
+    {{ note[2]|safe }}
+</div>
+{% endblock %}

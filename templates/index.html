@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>VulnNotes</h1>
+{% if user %}
+    <p>Logged in as <strong>{{ user[1] }}</strong>.</p>
+{% else %}
+    <p>A small notes app. <a href="/login">Log in</a> or <a href="/register">register</a> to get started.</p>
+{% endif %}
+{% endblock %}
